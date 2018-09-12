@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+	<div class="carousel">
+		<ul class="slides">
+			<li class="slide active">Slide 1</li>
+			<li class="slide">Slide 2</li>
+			<li class="slide">Slide 3</li>
+			<li class="slide">Slide 4</li>
+			<li class="slide">Slide 5</li>
+		</ul>	
+
+		<div class="controls">
+			<button class="control__item" id="previous">Previous</button>
+			<button class="control__item" id="next">Next</button>
+		</div>
+
+		<div class="indicators">
+			<span class="indicators__pause" id="pause">Pause</span>
+			<span class="indicators__item active"	data-slide-to="1">1</span>
+			<span class="indicators__item"	data-slide-to="2">2</span>
+			<span class="indicators__item"	data-slide-to="3">3</span>
+			<span class="indicators__item"	data-slide-to="4">4</span>
+			<span class="indicators__item"	data-slide-to="5">5</span>
+		</div>
+	</div>
+	
+	<script src="js/main.js"></script>
+</body>
+</html>
