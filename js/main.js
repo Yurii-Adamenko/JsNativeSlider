@@ -1,6 +1,6 @@
 'use strict';
 
-var slides = document.querySelectorAll('.slide');
+var slides = document.querySelectorAll('.slides__item');
 var indContainer = document.querySelector('.indicators');
 var indicators = document.querySelectorAll('.indicators__item');
 var currentSlide = 0;
@@ -8,9 +8,11 @@ var currentSlide = 0;
 const LEFT_ARROW = 37;
 const RIGHT_ARROW = 39;
 const SPACE = 32;
+const PAUSE = '<i class="fas fa-pause"></i>';
+const PLAY = '<i class="fas fa-play"></i>';
 
 document.querySelector('.controls').style.display = 'block';
-document.querySelector('.indicators').style.display = 'block';
+indContainer.style.display = 'flex';
 
 // slider engine
 var goToSlide = function (n) {
@@ -30,13 +32,13 @@ var prevSlide = function () {
 };
 
 var pauseSlideShow = function () {
-	pauseButton.innerHTML = 'Play';
+	pauseButton.innerHTML = PAUSE;
 	playingStatus = false;
 	clearInterval(slideInterval);
 };
 
 var playSlideShow = function () {
-	pauseButton.innerHTML = 'Pause';
+	pauseButton.innerHTML = PLAY;
 	playingStatus = true;
 	slideInterval = setInterval(nextSlide, 2000);
 };
@@ -45,9 +47,9 @@ var slideInterval = setInterval(nextSlide, 2000);
 
 // control buttons
 var playingStatus = true;
-var pauseButton = document.querySelector('#pause');
-var nextButton = document.querySelector('#next');
-var prevButton = document.querySelector('#previous');
+var pauseButton = document.querySelector('.indicators__pause');
+var nextButton = document.querySelector('.controls__next');
+var prevButton = document.querySelector('.controls__prev');
 
 var pauseClickHandler = function () {
 	playingStatus ? pauseSlideShow() : playSlideShow();
