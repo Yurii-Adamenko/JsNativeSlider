@@ -1,8 +1,6 @@
-'use strict';
-
-var slides = document.querySelectorAll('.slides__item');
-var indContainer = document.querySelector('.indicators');
-var indicators = document.querySelectorAll('.indicators__item');
+var slides = $('.slides__item');
+var indContainer = $('.indicators');
+var indicators = $('.indicators__item');
 var currentSlide = 0;
 
 const LEFT_ARROW = 37;
@@ -11,16 +9,16 @@ const SPACE = 32;
 const PAUSE = '<i class="fas fa-pause"></i>';
 const PLAY = '<i class="fas fa-play"></i>';
 
-document.querySelector('.controls').style.display = 'block';
-indContainer.style.display = 'flex';
+$('.controls').show();
+indContainer.css('display', 'flex');
 
 // slider engine
 var goToSlide = function (n) {
-	slides[currentSlide].classList.toggle('active');
-	indicators[currentSlide].classList.toggle('active');
+	slides[currentSlide].toggle('active');
+	indicators[currentSlide].toggle('active');
 	currentSlide = (n + slides.length) % slides.length;
-	slides[currentSlide].classList.toggle('active');
-	indicators[currentSlide].classList.toggle('active');
+	slides[currentSlide].toggle('active');
+	indicators[currentSlide].toggle('active');
 };
 
 var nextSlide = function () {
@@ -32,13 +30,13 @@ var prevSlide = function () {
 };
 
 var pauseSlideShow = function () {
-	pauseButton.innerHTML = PAUSE;
+	pauseButton.html(PAUSE);
 	playingStatus = false;
 	clearInterval(slideInterval);
 };
 
 var playSlideShow = function () {
-	pauseButton.innerHTML = PLAY;
+	pauseButton.html(PLAY);
 	playingStatus = true;
 	slideInterval = setInterval(nextSlide, 2000);
 };
@@ -47,9 +45,9 @@ var slideInterval = setInterval(nextSlide, 2000);
 
 // control buttons
 var playingStatus = true;
-var pauseButton = document.querySelector('.indicators__pause');
-var nextButton = document.querySelector('.controls__next');
-var prevButton = document.querySelector('.controls__prev');
+var pauseButton = $('.indicators__pause');
+var nextButton = $('.controls__next');
+var prevButton = $('.controls__prev');
 
 var pauseClickHandler = function () {
 	playingStatus ? pauseSlideShow() : playSlideShow();
@@ -65,22 +63,22 @@ var prevClickHandler = function () {
 	prevSlide();
 };
 
-pauseButton.addEventListener('click', pauseClickHandler);
-prevButton.addEventListener('click', prevClickHandler);
-nextButton.addEventListener('click', nextClickHandler);
+pauseButton.on('click', pauseClickHandler);
+prevButton.on('click', prevClickHandler);
+nextButton.on('click', nextClickHandler);
 
 // inicators
 var indicatorsClickHandler = function (e) {
 	let target = e.target;
 
-	if (target.classList.contains('indicators__item')) {
-		let n = target.getAttribute('data-slide-to') - 1;
+	if (target.contains('indicators__item')) {
+		let n = target.attr('data-slide-to') - 1;
 		pauseSlideShow();
 		goToSlide(n);
 	}
 };
 
-indContainer.addEventListener('click', indicatorsClickHandler);
+indContainer.on('click', indicatorsClickHandler);
 
 // keyboard controls
 var keyControlsHandler = function (e) {
@@ -89,4 +87,4 @@ var keyControlsHandler = function (e) {
 	if (e.keyCode === SPACE) { pauseClickHandler(); }
 };
 
-document.addEventListener('keydown', keyControlsHandler);
+$on('keydown', keyControlsHandler);
