@@ -14,11 +14,11 @@ indContainer.css('display', 'flex');
 
 // slider engine
 var goToSlide = function (n) {
-	slides[currentSlide].toggle('active');
-	indicators[currentSlide].toggle('active');
+	slides[currentSlide].classList.toggle('active');
+	indicators[currentSlide].classList.toggle('active');
 	currentSlide = (n + slides.length) % slides.length;
-	slides[currentSlide].toggle('active');
-	indicators[currentSlide].toggle('active');
+	slides[currentSlide].classList.toggle('active');
+	indicators[currentSlide].classList.toggle('active');
 };
 
 var nextSlide = function () {
@@ -71,8 +71,8 @@ nextButton.on('click', nextClickHandler);
 var indicatorsClickHandler = function (e) {
 	let target = e.target;
 
-	if (target.contains('indicators__item')) {
-		let n = target.attr('data-slide-to') - 1;
+	if (target.classList.contains('indicators__item')) {
+		let n = $(target).attr('data-slide-to') - 1;
 		pauseSlideShow();
 		goToSlide(n);
 	}
@@ -87,4 +87,4 @@ var keyControlsHandler = function (e) {
 	if (e.keyCode === SPACE) { pauseClickHandler(); }
 };
 
-$on('keydown', keyControlsHandler);
+$(document).on('keydown', keyControlsHandler);
